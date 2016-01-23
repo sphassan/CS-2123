@@ -18,10 +18,11 @@ void main()
 	//Placeholder size check, replace with dynamics using array of char arrays to parse to int array
 		
 	printf("Input values: "); //Input envisioned as being single line text input from keyboard, numbers separated by spaces, entire line read into single char array
-	for (int z = 0; z < size; z++) //For loop will be redesigned to parse array of char arrays (made by splitting initial char array on spaces) into an array of integers with each value being one char sub-array
+	int a;
+	for (int a = 0; a < size; a++) //For loop will be redesigned to parse array of char arrays (made by splitting initial char array on spaces) into an array of integers with each value being one char sub-array
 	{
 		scanf("%d", &holding);
-		arr[z] = holding;
+		arr[a] = holding;
 	}
 	printf("\n");
 	
@@ -29,50 +30,63 @@ void main()
 	int trueSize = size;
 	
 	qsort(arr, size, sizeof(int), cmp);
-	largestBuild = arr[0];
 	
-	for (int x = 1; x < size; x++)
+	if (arr[0] == 1)
+		largestBuild = arr[0];
+	else
 	{
-		if (arr[x] > (largestBuild + 1))
+		printf("1 : NA");
+		exit();
+	}
+	
+	int b;
+	for (b = 1; b < size; b++)
+	{
+		if (arr[b] > (largestBuild + 1))
 		{
-			trueSize = x-1;
+			trueSize = b-1;
 			break;
 		}
 		else
-			largestBuild += arr[x];
+			largestBuild += arr[b];
 	}
 	
 	
 	int matrix[largestBuild - 1][trueSize];
-	for (int a = trueSize; a >= 0; a--)
-		matrix[largestBuild - 1][a] = arr[a];
+	int c;
+	for (c = trueSize; c >= 0; c--)
+		matrix[largestBuild - 1][c] = arr[c];
 	
 	int workingBuild;
-	
-	for (int y = largestBuild - 1; y > 0; y--)
+	int d;
+	int e;
+	int f;
+	for (d = largestBuild - 1; d > 0; d--)
 	{
-		for (int z = 0; z < trueSize; z++)
+		for (e = 0; e < trueSize; e++)
 		{
-			workingBuild = largestBuild  - matrix[y][z];
-			for (int b = trueSize; b >= 0; b--)
-				if (b != z)
-					matrix[workingBuild][b] = arr[b];
+			workingBuild = largestBuild  - matrix[d][e];
+			for (f = trueSize; f >= 0; f--)
+				if (f != e)
+					matrix[workingBuild][f] = arr[f];
 				else
-					matrix[workingBuild][b] = 0;
+					matrix[workingBuild][f] = 0;
 		}
 	}
 	
-	for (int c = 0; c < largestBuild; c++)
+	int g;
+	int h;
+	for (g = 0; g < largestBuild; g++)
 	{
-		printf(c+1, ": ");
+		printf(g+1, ": ");
 		workingBuild = 0;
-		for (int d = trueSize; d >= 0; d--)
+		for (h = trueSize; h >= 0; h--)
 		{
-			if (workingBuild == 0 && matrix[c][d] != 0)
-				printf(matrix[c][d], " ");
-			else if (matrix[c][d] != 0)
-				printf("+ ", matrix[c][d], " ");
-			workingBuild += matrix[c][d];
+			if (workingBuild == 0 && matrix[g][h] != 0)
+				printf(matrix[g][h], " ");
+			else if (matrix[g][h] != 0)
+				printf("+ ", matrix[g][h], " ");
+			workingBuild += matrix[g][h];
 		}
 		printf("\n");
 	}
