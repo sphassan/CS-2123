@@ -8,27 +8,39 @@ int cmp (const void *a, const void *b)
 
 void main()
 {
-        int size;
+        int size = 1;
         int holding;
+        int* holdingArray = malloc(sizeof(int*) * size);
+        int** arrLoc = &holdingArray;
 
-        printf("Input the number of variables you will have: "); //Must be removed, see next comment
-        scanf("%d", &size);
-
-        int arr[size];
-
-        //Placeholder size check, replace with dynamics using array of char arrays to parse to int array
-
-        printf("Input values: "); //Input envisioned as being single line text input from keyboard, numbers separated by spaces, entire line read into single char array
-        int a;
-        for (a = 0; a < size; a++) //For loop will be redesigned to parse array of char arrays (made by splitting initial char array on spaces) into an array of integers with each value being one char sub-array
+        printf("Input values: ");
+        int input = 1;
+        int loc = 0;
+        char junk = ' ';
+        while (input == 1)
         {
-                scanf("%d", &holding);
-                arr[a] = holding;
+                if (scanf("%d", &holding) > 0)
+                {
+                        holdingArray[loc] = holding;
+                        loc++;
+                        size++;
+                        holdingArray = realloc(*arrLoc, size * sizeof(int));
+                }
+                junk = getchar();
+                if (junk != ' ')
+                        input = 0;
         }
         printf("\n");
+        size--;
+
+        int arr[size];
+        int a;
+        for (a = 0; a < size; a++)
+                arr[a] = holdingArray[a];
+        free(holdingArray);
 
         int largestBuild;
-        int trueSize = size - 1; //rename to lastElement
+        int lastElement = size - 1;
 
         qsort(arr, size, sizeof(int), cmp);
 
@@ -36,7 +48,7 @@ void main()
                 largestBuild = arr[0];
         else
         {
-                printf("1 : NA");
+                printf("1 : NA\n");
                 exit(0);
         }
 
@@ -45,7 +57,7 @@ void main()
         {
                 if (arr[b] > (largestBuild + 1))
                 {
-                        trueSize = b-1;
+                        lastElement = b-1;
                         break;
                 }
                 else
@@ -55,16 +67,10 @@ void main()
         int** matrix = malloc(sizeof(int*) * largestBuild);
         int build;
         for (build = 0; build < largestBuild; build++)
-                matrix[build] = malloc(sizeof(int) * trueSize+1);
-
-        int w;
-        int x;
-        for (w = 0; w < largestBuild; w++)
-                for (x = 0; x <= trueSize; x++)
-                        matrix[w][x] = 0;
+                matrix[build] = calloc(1, sizeof(int) * lastElement+1);
 
         int c;
-        for (c = 0; c <= trueSize; c++)
+        for (c = 0; c <= lastElement; c++)
                 matrix[largestBuild - 1][c] = arr[c];
 
         int workingLocation;
@@ -73,12 +79,12 @@ void main()
         int f;
         for (d = largestBuild - 1; d > 1; d--)
         {
-                for (e = 0; e <= trueSize; e++)
+                for (e = 0; e <= lastElement; e++)
                 {
                         if (d - matrix[d][e] >= 0)
                         {
                                 workingLocation = d - matrix[d][e];
-                                for (f = 0; f <= trueSize; f++)
+                                for (f = 0; f <= lastElement; f++)
                                         if (f != e)
                                                 matrix[workingLocation][f] = matrix[d][f];
                                         else
@@ -94,7 +100,7 @@ void main()
         {
                 printf("%d : ", g+1);
                 workingBuild = 0;
-                for (h = trueSize; h >= 0; h--)
+                for (h = lastElement; h >= 0; h--)
                 {
                         if (workingBuild == 0 && matrix[g][h] != 0)
                                 printf("%d", matrix[g][h]);
