@@ -17,7 +17,5 @@
 * numbers that do not violate the rule of the series, and then works backwards. All numbers less than the sum of   *
 * all numbers may be made by removing members of the series from the sum.                                          *
 *                                                                                                                  *
-* This code was created as part of an academic assignment and may be displayed for educational and recordkeeping   *
-* purposes, misuse or copying of it on similar assignments may constitute plaigiarism. All rights reserved where   *
-* applicable by the programmer and the University of Texas at San Antonio.                                         *
+* This recitation was written solely by myself.                                                                    *
 *******************************************************************************************************************/
