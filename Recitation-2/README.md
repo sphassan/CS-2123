@@ -1,1 +1,1 @@
-Written in colloboration with Luke Holbrook and Ashley Abernathy.
+Written in collaboration with Luke Holbrook and Ashley Abernathy.
