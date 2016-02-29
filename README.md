@@ -3,4 +3,6 @@ Recitation and assignment programs from Data Structures course. This repository 
 
 Recitations are group projects, assignments are individual work.
 
+Code written here does not necessarily reflect the state of work as turned in for a grade, refinements and feedback have been incorporated from time to time.
+
 All code was created as part of academic assignments and may be displayed for educational and recordkeeping purposes, misuse or copying of it on similar assignments may constitute plaigiarism. All rights reserved where applicable by the programmer and the University of Texas at San Antonio.
