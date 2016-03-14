@@ -1,7 +1,3 @@
-/*	Ashley Abernathy Sean Hassan and Luke Holbrook	*
-*	Recitation 4 - Doctor Ali Saman Tosun			*
-*	Data Structures - Spring 2016					*/
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
